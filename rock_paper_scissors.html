@@ -76,7 +76,6 @@
 
         function playRound(button) {
             const computerChoice = getComputerChoice()
-            
 
             const human_choice_btn = button.id
             console.log(human_choice_btn)
@@ -145,6 +144,17 @@
 
             human_score_display.textContent = humanScore
             computer_score_display.textContent = computerScore
+
+            if (humanScore == 5) {
+                displayOutput("You have won the game! Congrats!")
+                humanScore = 0
+                computerScore = 0
+            }
+            if (computerScore == 5) {
+                displayOutput("The computer has won the game! Try again!")
+                humanScore = 0
+                computerScore = 0
+            }
         }
 
         game_btns.forEach((button) => {
