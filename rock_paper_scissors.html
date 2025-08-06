@@ -4,6 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+        .results-container {
+            border: solid black;
+
+        }
+        ul {
+            list-style-type: none;
+        }
+    </style>
 </head>
 <body>
     <div class="button-container">
@@ -17,78 +30,95 @@
         </ul>
     </div>
     <script>
+        const result_display = document.querySelector("ul")
         const game_btns = document.querySelectorAll(".game-btn")
+        let humanScore = 0
+        let computerScore = 0
 
         function getComputerChoice() {
             const random_num = Math.random()
             let choice = ""
             if (random_num < 0.33) {
-                choice = "rock"
+                choice = "Rock"
             }
             else if (random_num >= 0.33 && random_num < 0.66) {
-                choice = "paper"
+                choice = "Paper"
             }
             else {
-                choice = "scissors"
+                choice = "Scissors"
             }
             return choice
         }
 
+        function displayOutput (string) {
+            const list_item = document.createElement("li")
+            list_item.textContent = string
+            result_display.appendChild(list_item)
+        }
+
         function playRound(button) {
             const computerChoice = getComputerChoice()
+            const computerChoiceString = `The computer chose ${computerChoice}`
+            displayOutput(computerChoiceString)
+
             const human_choice_btn = button.id
             console.log(human_choice_btn)
             let humanChoice = ""
             switch (human_choice_btn) {
                 case "rock-btn":
-                    humanChoice = "rock"
+                    humanChoice = "Rock"
                     break
                 case "paper-btn":
-                    humanChoice = "paper"
+                    humanChoice = "Paper"
                     break
                 case "scissors-btn":
-                    humanChoice = "scissors"
+                    humanChoice = "Scissors"
                     break
             }
             console.log(`Computer Choice: ${computerChoice}`)
             console.log(`Human Choice: ${humanChoice}`)
-            // let outcome = 0 // 0 = draw, 1 = human win, 2 = comp win
-            // if (computerChoice == "rock") {
-            //     if (humanChoice == "paper") {
-            //         outcome = 1
-            //     }
-            //     else if (humanChoice == "scissors") {
-            //         outcome = 2
-            //     }
-            // }
-            // else if (computerChoice == "paper") {
-            //     if (humanChoice == "scissors") {
-            //         outcome = 1
-            //     }
-            //     else if (humanChoice == "rock") {
-            //         outcome = 2
-            //     }
-            // }
-            // else if (computerChoice == "scissors") {
-            //     if (humanChoice == "rock") {
-            //         outcome = 1
-            //     }
-            //     else if (humanChoice == "paper") {
-            //         outcome = 2
-            //     }
-            // }
-            // if (outcome == 0) {
-            //     console.log("Draw!")
-            // }
-            // else if (outcome == 1) {
-            //     console.log(`You win! ${humanChoice} beats ${computerChoice}`)
-            //     humanScore++
-            // }
-            // else if (outcome == 2) {
-            //     console.log(`You lose! ${computerChoice} beats ${humanChoice}`)
-            //     computerScore++
-            // }
+            let outcome = 0 // 0 = draw, 1 = human win, 2 = comp win
+            if (computerChoice == "Rock") {
+                if (humanChoice == "Paper") {
+                    outcome = 1
+                }
+                else if (humanChoice == "Scissors") {
+                    outcome = 2
+                }
+            }
+            else if (computerChoice == "Paper") {
+                if (humanChoice == "Scissors") {
+                    outcome = 1
+                }
+                else if (humanChoice == "Rock") {
+                    outcome = 2
+                }
+            }
+            else if (computerChoice == "Scissors") {
+                if (humanChoice == "Rock") {
+                    outcome = 1
+                }
+                else if (humanChoice == "Paper") {
+                    outcome = 2
+                }
+            }
+            let result_output = ""
+            if (outcome == 0) {
+                result_output = "Draw!"
+            }
+            else if (outcome == 1) {
+                result_output = `You win! ${humanChoice} beats ${computerChoice}`
+                console.log(`You win! ${humanChoice} beats ${computerChoice}`)
+                humanScore++
+            }
+            else if (outcome == 2) {
+                result_output = `You lose! ${computerChoice} beats ${humanChoice}`
+                console.log(`You lose! ${computerChoice} beats ${humanChoice}`)
+                computerScore++
+            }
+            displayOutput(result_output)
         }
+
         game_btns.forEach((button) => {
             button.addEventListener("click", () => playRound(button))
         })
