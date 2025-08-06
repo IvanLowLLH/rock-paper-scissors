@@ -3,30 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>RPS</title>
     <style>
         body {
             display: flex;
             flex-direction: column;
         }
+        .header {
+            text-align: center;
+        }
+        .button-container {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
         .score-container {
             display: flex;
             gap: 10px;
+            justify-content: center;
         }
         .score {
             text-align: center;
         }
         .results-container {
             border: solid black;
-
+            justify-content: center;
         }
 
         ul {
             list-style-type: none;
+            text-align: center;
         }
     </style>
 </head>
 <body>
+    <div class="header">
+        <h1>ROCK, PAPER, SCISSORS</h1>
+    </div>
     <div class="button-container">
         <button class="game-btn" id="rock-btn">Rock</button>
         <button class="game-btn" id="paper-btn">Paper</button>
@@ -34,7 +47,7 @@
     </div>
     <div class="score-container">
         <div class="score">
-            <p>Human Score:</p>
+            <p>Your Score:</p>
             <p id="human-score">0</p>
         </div>
         <div class="score">
@@ -155,6 +168,7 @@
                 humanScore = 0
                 computerScore = 0
             }
+            displayOutput("-------------------------------")
         }
 
         game_btns.forEach((button) => {
