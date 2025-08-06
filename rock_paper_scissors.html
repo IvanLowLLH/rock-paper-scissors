@@ -76,8 +76,7 @@
 
         function playRound(button) {
             const computerChoice = getComputerChoice()
-            const computerChoiceString = `The computer chose ${computerChoice}`
-            displayOutput(computerChoiceString)
+            
 
             const human_choice_btn = button.id
             console.log(human_choice_btn)
@@ -93,6 +92,11 @@
                     humanChoice = "Scissors"
                     break
             }
+            const humanChoiceString = `You chose ${humanChoice}`
+            const computerChoiceString = `The computer chose ${computerChoice}`
+            displayOutput(humanChoiceString)
+            displayOutput(computerChoiceString)
+
             console.log(`Computer Choice: ${computerChoice}`)
             console.log(`Human Choice: ${humanChoice}`)
             let outcome = 0 // 0 = draw, 1 = human win, 2 = comp win
